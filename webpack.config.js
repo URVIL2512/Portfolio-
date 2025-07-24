@@ -2,13 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js', // ✅ Correct entry point
   output: {
-  path: path.resolve(__dirname, 'dist'),
-  filename: 'bundle.js',
-  publicPath: '/Portfolio-/',
-},
-
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: './', // ✅ works both locally and for GitHub Pages
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -32,12 +31,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './public/index.html', // ✅ correct path
     }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, './'),
+      directory: path.join(__dirname, 'dist'), // ✅ serve from dist
     },
     port: 8080,
     open: true,
@@ -45,4 +44,4 @@ module.exports = {
     historyApiFallback: true,
   },
   mode: 'development',
-}; 
+};
